@@ -42,8 +42,8 @@ public class ProdutosDAO {
     
     public ArrayList<ProdutosDTO> listarProdutos(){
         
-        conn = new conectaDAO().connectDB(); // Conexão com o banco
-        listagem = new ArrayList<>(); // Inicializa a lista
+        conn = new conectaDAO().connectDB(); 
+        listagem = new ArrayList<>(); 
 
         String sql = "SELECT id, nome, valor, status FROM produtos";
 
@@ -55,10 +55,10 @@ public class ProdutosDAO {
             ProdutosDTO produto = new ProdutosDTO();
             produto.setId(resultset.getInt("id"));
             produto.setNome(resultset.getString("nome"));
-            produto.setValor(resultset.getInt("valor")); // Ajuste para Double, se necessário
+            produto.setValor(resultset.getInt("valor")); 
             produto.setStatus(resultset.getString("status"));
 
-            listagem.add(produto); // Adiciona o produto à lista
+            listagem.add(produto); 
         }
 
         } catch (Exception ex) {

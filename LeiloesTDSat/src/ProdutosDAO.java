@@ -95,7 +95,7 @@ public class ProdutosDAO {
                 JOptionPane.showMessageDialog(null, "Produto não encontrado!");
             }
         } catch(Exception ex) {
-            JOptionPane.showMessageDialog(null, "Errp ao vender o produto: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao vender o produto: " + ex.getMessage());
             ex.printStackTrace();
         } finally {
             try {
@@ -111,7 +111,7 @@ public class ProdutosDAO {
         conn = new conectaDAO().connectDB();
         ArrayList<ProdutosDTO> produtosVendidos = new ArrayList<>();
         
-        String sql = "SELECT id, nome, valor, satus FROM produtos WHERE status = ?";
+        String sql = "SELECT id, nome, valor, status FROM produtos WHERE status = ?";
         
         try {
             prep = conn.prepareStatement(sql);

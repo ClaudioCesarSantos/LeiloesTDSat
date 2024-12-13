@@ -27,10 +27,11 @@ public class ProdutosDAO {
         conn = new conectaDAO().connectDB();
         
         try { 
-            prep = conn.prepareStatement("INSERT INTO produtos (nome, valor) VALUES(?,?)");
+            prep = conn.prepareStatement("INSERT INTO produtos (nome, valor, status) VALUES(?,?,?)");
             
             prep.setString(1, produto.getNome());
             prep.setInt(2, produto.getValor());
+            prep.setString(3, produto.getStatus());
             
             prep.executeUpdate();
             
@@ -75,6 +76,35 @@ public class ProdutosDAO {
       }
         
         return listagem;
+    }
+    
+    public void venderProduto(int idProduto) {
+        conn = new conectaDAO().connectDB();
+        
+        try {
+            String sql = "UPDATE produtos SET status = ? WHERE id = ?";
+            prep = conn.prepareStatement(sql);
+            prep.setString(1, "Vendido");
+            prep.setInt(2, idProduto);
+            
+            int rowsUpdated = prep.executeUpdate();
+            
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(null, "Produto vendido com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Produto não encontrado!");
+            }
+        } catch(Exception ex) {
+            JOptionPane.showMessageDialog(null, "Errp ao vender o produto: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (prep != null) prep.close();
+                if (conn != null) conn.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
     
 }
